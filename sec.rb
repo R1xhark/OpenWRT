@@ -8,13 +8,15 @@ end
 # Password prompt for TTY and serial console
 
 def enable_autentication
+  puts "Enabling autentication..."
   system('uci set system.@system[0].ttylogin="1"')
   system('uci commit system')
   system('service system start')
+  puts "Autentication complete"
 end
 
 # ip adress logging - currently commented out due to presence in other scripts
-/*
+=begin
 def log_connected_ips
   connected_ips = `arp -n | grep -v incomplete | awk '{print $1}'`.split("\n")
 
@@ -25,4 +27,10 @@ def log_connected_ips
     end
   end
 end
-*/
+=end
+
+# execution
+
+set_root_password
+enable_tty_authentication
+# log_connected_ips
